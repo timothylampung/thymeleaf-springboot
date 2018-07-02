@@ -1,0 +1,142 @@
+
+
+
+create database internship_dev;
+
+create table dt_supervisor
+(
+  dt_supervisor_id         serial not null
+    constraint dt_supervisor_pkey
+    primary key,
+  dt_supervisor_name       varchar(100),
+  dt_supervisor_contact    varchar(15),
+  dt_supervisor_email      varchar(30),
+  dt_supervisor_company_id integer
+);
+
+create table dt_company
+(
+  dt_company_id        serial not null
+    constraint dt_company_pkey
+    primary key,
+  dt_company_name      varchar(100),
+  dt_company_address_1 varchar(100),
+  dt_company_address_2 varchar(100),
+  dt_company_address_3 varchar(100),
+  dt_company_state     varchar(4),
+  dt_company_type      varchar(30),
+  dt_company_contact   varchar(30),
+  dt_company_email     varchar(30)
+);
+
+create table dt_lecturer
+(
+  dt_lecturer_id         serial not null
+    constraint dt_lecturer_pkey
+    primary key,
+  dt_lecturer_name       varchar(30),
+  dt_lecturer_department varchar(4),
+  dt_lecturer_user_id    integer
+);
+
+create table dt_student
+(
+  dt_student_id         serial not null
+    constraint dt_student_pkey
+    primary key,
+  dt_student_matric     varchar(15),
+  dt_student_ic         varchar(15),
+  dt_student_course     varchar(4),
+  dt_student_cgpa       varchar(4),
+  dt_student_user_id    integer,
+  dt_student_department varchar(30)
+);
+
+create table dt_user
+(
+  dt_user_id            serial not null
+    constraint dt_user_pkey
+    primary key,
+  dt_user_name          varchar(100),
+  dt_user_contact       varchar(15),
+  dt_user_email         varchar(30),
+  dt_user_password      varchar(100),
+  dt_user_active_status boolean
+);
+
+create table dt_internship_application
+(
+  dt_internship_application_id serial not null
+    constraint dt_internship_application_pkey
+    primary key,
+  dt_internship_student_id     integer,
+  dt_internship_company_id     integer,
+  dt_internship_status         integer
+);
+
+create table dt_internship
+(
+  dt_internship_id             serial not null
+    constraint dt_internship_pkey
+    primary key,
+  dt_internship_application_id integer,
+  dt_internship_start_date     timestamp,
+  dt_internship_end_date       timestamp,
+  dt_internship_allowance      numeric
+);
+
+create unique index dt_internship_dt_internship_application_id_uindex
+  on dt_internship (dt_internship_application_id);
+
+create table dt_progress
+(
+  dt_progress_id              serial not null
+    constraint dt_progress_pkey
+    primary key,
+  dt_progress_internship_id   integer,
+  dt_progress_report          varchar(500),
+  dt_progress_date            timestamp,
+  dt_progress_lecturer_remark varchar(500)
+);
+
+create table dt_company_evaluation_application
+(
+  dt_company_evaluation_application_id            serial not null
+    constraint dt_company_evaluation_pkey
+    primary key,
+  dt_company_evaluation_application_company_id    integer,
+  dt_company_evaluation_application_internship_id integer
+);
+
+create table dt_evaluation
+(
+  dt_evaluation_id                     serial not null
+    constraint dt_evaluation_pkey
+    primary key,
+  dt_company_evaluation_application_id integer,
+  dt_collaboration                     integer,
+  dt_guidance                          integer,
+  dt_major                             integer,
+  dt_work_load                         integer,
+  dt_facilities                        integer,
+  dt_major_suitable                    varchar(30),
+  dt_allowance                         numeric
+);
+
+create table dt_access_level
+(
+  dt_access_level_id   serial not null
+    constraint dt_access_level_pkey
+    primary key,
+  dt_access_level_role varchar
+);
+
+create unique index dt_access_level_dt_access_level_role_uindex
+  on dt_access_level (dt_access_level_role);
+
+create table dt_user_role
+(
+  dt_user_id          integer,
+  dt_accsess_level_id integer
+);
+

@@ -55,7 +55,6 @@ public class AuthController {
     }
 
 
-
     @PostMapping("/login")
     public PrincipalDetails successLogin(@RequestBody LoginVo loginVo){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -63,7 +62,6 @@ public class AuthController {
         principalDetails.setAuthorities(auth.getAuthorities());
         return principalDetails;
     }
-
 
 
     @PostMapping("/register")

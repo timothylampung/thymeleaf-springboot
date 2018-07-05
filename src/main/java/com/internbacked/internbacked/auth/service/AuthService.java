@@ -6,4 +6,5 @@ import com.internbacked.internbacked.auth.domain.model.PrincipalDetails;
 public interface AuthService {
     PrincipalDetails registerNewUser(PrincipalVo principalVo);
     PrincipalDetails findUserByUsername(String s);
+    PrincipalDetails getCurrentLogged();
 }

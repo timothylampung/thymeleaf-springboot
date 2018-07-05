@@ -29,9 +29,9 @@ public interface User {
     void setDtUserPassword(String dtUserPassword);
 
 
-    String getDtUserActiveStatus();
+    boolean getDtUserActiveStatus();
 
-    void setDtUserActiveStatus(String dtUserActiveStatus);
+    void setDtUserActiveStatus(boolean dtUserActiveStatus);
 
      Set<RoleImpl> getRoles();
 

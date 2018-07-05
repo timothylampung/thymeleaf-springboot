@@ -15,7 +15,6 @@ public class CustomUserDetails extends UserImpl implements UserDetails {
     public CustomUserDetails(final UserImpl user) {
         super(user);
         thisUser = user;
-
     }
 
 
@@ -30,12 +29,12 @@ public class CustomUserDetails extends UserImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return super.getDtUserPassword();
+        return thisUser.getDtUserPassword();
     }
 
     @Override
     public String getUsername() {
-        return super.getDtUserName();
+        return thisUser.getDtUserName() ;
     }
 
     @Override

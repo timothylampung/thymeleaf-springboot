@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         optionalUser.orElseThrow(()-> new UsernameNotFoundException("Username Not Found"));
 
         return optionalUser.map(
-                user -> new CustomUserDetails(user)
+                CustomUserDetails::new
         ).get();
 
     }
